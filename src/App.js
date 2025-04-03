@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import styled from "styled-components";
+import HomeComponent from "./modules/home";
+import SideMenuComponent from "./components/SideMenuComponent";
 
-function App() {
+const Container = styled.div`
+  display: flex;
+  height: 100vh;
+  width: 100%;
+`;
+
+const MainContent = styled.div`
+  flex: 1;
+  padding: 20px;
+  background: #f5f5f5;
+`;
+
+const App = () => {
+  const [selectedTab, setSelectedTab] = useState("home");
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      <SideMenuComponent 
+        selectedTab={selectedTab} 
+        changeTab={setSelectedTab} 
+      />
+      <MainContent>
+        {selectedTab === "home" && <HomeComponent />}
+        {/* Add other tabs here when needed */}
+      </MainContent>
+    </Container>
   );
-}
+};
 
 export default App;
